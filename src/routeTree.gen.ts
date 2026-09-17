@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as FaxrimizRouteImport } from './routes/faxrimiz'
+import { Route as MalumotRouteImport } from './routes/malumot'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaxrimizRoute = FaxrimizRouteImport.update({
+  id: '/faxrimiz',
+  path: '/faxrimiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MalumotRoute = MalumotRouteImport.update({
+  id: '/malumot',
+  path: '/malumot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/faxrimiz': typeof FaxrimizRoute
+  '/malumot': typeof MalumotRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/faxrimiz': typeof FaxrimizRoute
+  '/malumot': typeof MalumotRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/faxrimiz': typeof FaxrimizRoute
+  '/malumot': typeof MalumotRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/admin' | '/faxrimiz' | '/malumot'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/admin' | '/faxrimiz' | '/malumot'
+  id: '__root__' | '/' | '/admin' | '/faxrimiz' | '/malumot'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  FaxrimizRoute: typeof FaxrimizRoute
+  MalumotRoute: typeof MalumotRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faxrimiz': {
+      id: '/faxrimiz'
+      path: '/faxrimiz'
+      fullPath: '/faxrimiz'
+      preLoaderRoute: typeof FaxrimizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/malumot': {
+      id: '/malumot'
+      path: '/malumot'
+      fullPath: '/malumot'
+      preLoaderRoute: typeof MalumotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  FaxrimizRoute: FaxrimizRoute,
+  MalumotRoute: MalumotRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
