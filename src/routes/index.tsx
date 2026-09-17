@@ -91,10 +91,11 @@ function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 self-center">
-            {stats.map((s) => (
+            {stats.map((s, i) => (
               <div
                 key={s.label}
-                className="rounded-2xl glass-panel-dark p-5 text-primary-foreground transition-transform hover:-translate-y-1"
+                className="rounded-2xl glass-panel-dark p-5 text-primary-foreground transition-transform hover:-translate-y-1 animate-slide-up-fade"
+                style={{ animationDelay: `${i * 100 + 200}ms` }}
               >
                 <s.icon className="h-6 w-6 text-primary-foreground/80" aria-hidden />
                 <p className="mt-3 font-display text-2xl font-bold sm:text-3xl">
@@ -129,10 +130,11 @@ function HomePage() {
         </div>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {state.news.map((item) => (
+          {state.news.map((item, i) => (
             <article
               key={item.id}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-elevated"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-elevated animate-slide-up-fade"
+              style={{ animationDelay: `${i * 100}ms` }}
             >
               <div className="relative h-44 overflow-hidden bg-gradient-primary">
                 {item.imageUrl ? (
